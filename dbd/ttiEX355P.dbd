@@ -169,6 +169,14 @@ menu(aoOIF) {
 	choice(aoOIF_Full,"Full")
 	choice(aoOIF_Incremental,"Incremental")
 }
+menu(aaoPOST) {
+	choice(aaoPOST_Always,"Always")
+	choice(aaoPOST_OnChange,"On Change")
+}
+menu(aaiPOST) {
+	choice(aaiPOST_Always,"Always")
+	choice(aaiPOST_OnChange,"On Change")
+}
 menu(aSubLFLG) {
 	choice(aSubLFLG_IGNORE,"IGNORE")
 	choice(aSubLFLG_READ,"READ")
@@ -493,6 +501,27 @@ recordtype(aai) {
 		menu(menuAlarmSevr)
 		interest(2)
 	}
+	field(SIOL,DBF_INLINK) {
+		prompt("Sim Input Specifctn")
+		promptgroup(GUI_INPUTS)
+		interest(1)
+	}
+	field(MPST,DBF_MENU) {
+		prompt("Post Value Monitors")
+		promptgroup(GUI_DISPLAY)
+		menu(aaiPOST)
+		interest(1)
+	}
+	field(APST,DBF_MENU) {
+		prompt("Post Archive Monitors")
+		promptgroup(GUI_DISPLAY)
+		menu(aaiPOST)
+		interest(1)
+	}
+	field(HASH,DBF_ULONG) {
+		prompt("Hash of OnChange data.")
+		interest(3)
+	}
 }
 recordtype(aao) {
 	field(NAME,DBF_STRING) {
@@ -808,6 +837,27 @@ recordtype(aao) {
 		promptgroup(GUI_INPUTS)
 		menu(menuAlarmSevr)
 		interest(2)
+	}
+	field(SIOL,DBF_OUTLINK) {
+		prompt("Sim Output Specifctn")
+		promptgroup(GUI_INPUTS)
+		interest(1)
+	}
+	field(MPST,DBF_MENU) {
+		prompt("Post Value Monitors")
+		promptgroup(GUI_DISPLAY)
+		menu(aaoPOST)
+		interest(1)
+	}
+	field(APST,DBF_MENU) {
+		prompt("Post Archive Monitors")
+		promptgroup(GUI_DISPLAY)
+		menu(aaoPOST)
+		interest(1)
+	}
+	field(HASH,DBF_ULONG) {
+		prompt("Hash of OnChange data.")
+		interest(3)
 	}
 }
 recordtype(ai) {
@@ -2276,7 +2326,6 @@ recordtype(aSub) {
 		prompt("Input value J")
 		special(SPC_DBADDR)
 		extra("void *j")
-		pp(TRUE)
 		interest(2)
 		asl(ASL0)
 	}
@@ -4651,7 +4700,7 @@ recordtype(calc) {
 		initial("0")
 		promptgroup(GUI_CALC)
 		special(103)
-		size(40)
+		size(80)
 		pp(TRUE)
 	}
 	field(INPA,DBF_INLINK) {
@@ -4928,7 +4977,7 @@ recordtype(calc) {
 	field(RPCL,DBF_NOACCESS) {
 		prompt("Reverse Polish Calc")
 		special(SPC_NOMOD)
-		extra("char	rpcl[INFIX_TO_POSTFIX_SIZE(40)]")
+		extra("char	rpcl[INFIX_TO_POSTFIX_SIZE(80)]")
 		interest(4)
 	}
 }
@@ -5193,7 +5242,7 @@ recordtype(calcout) {
 		initial("0")
 		promptgroup(GUI_CALC)
 		special(103)
-		size(40)
+		size(80)
 		pp(TRUE)
 	}
 	field(CLCV,DBF_LONG) {
@@ -5396,7 +5445,7 @@ recordtype(calcout) {
 		initial("0")
 		promptgroup(GUI_CALC)
 		special(103)
-		size(40)
+		size(80)
 		pp(TRUE)
 	}
 	field(OCLV,DBF_LONG) {
@@ -5641,13 +5690,13 @@ recordtype(calcout) {
 	field(RPCL,DBF_NOACCESS) {
 		prompt("Reverse Polish Calc")
 		special(SPC_NOMOD)
-		extra("char	rpcl[INFIX_TO_POSTFIX_SIZE(40)]")
+		extra("char	rpcl[INFIX_TO_POSTFIX_SIZE(80)]")
 		interest(4)
 	}
 	field(ORPC,DBF_NOACCESS) {
 		prompt("Reverse Polish OCalc")
 		special(SPC_NOMOD)
-		extra("char	orpc[INFIX_TO_POSTFIX_SIZE(40)]")
+		extra("char	orpc[INFIX_TO_POSTFIX_SIZE(80)]")
 		interest(4)
 	}
 }
@@ -5969,6 +6018,10 @@ recordtype(compress) {
 	}
 	field(NUSE,DBF_ULONG) {
 		prompt("Number Used")
+		special(SPC_NOMOD)
+	}
+	field(OUSE,DBF_ULONG) {
+		prompt("Old Number Used")
 		special(SPC_NOMOD)
 	}
 	field(BPTR,DBF_NOACCESS) {
@@ -13405,6 +13458,8 @@ recordtype(waveform) {
 		interest(3)
 	}
 }
+device(aai,CONSTANT,devAaiSoft,"Soft Channel")
+device(aao,CONSTANT,devAaoSoft,"Soft Channel")
 device(ai,CONSTANT,devAiSoft,"Soft Channel")
 device(ai,CONSTANT,devAiSoftRaw,"Raw Soft Channel")
 device(ai,INST_IO,devTimestampAI,"Soft Timestamp")
