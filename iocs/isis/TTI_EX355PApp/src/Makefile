@@ -21,7 +21,7 @@ TTI_EX355P_DBD += asyn.dbd
 TTI_EX355P_DBD += drvAsynSerialPort.dbd
 
 # Add all the support libraries needed by this IOC
-TTI_EX355P_LIBS += stream asyn pcre
+TTI_EX355P_LIBS += stream asyn
 
 # TTI_EX355P_registerRecordDeviceDriver.cpp derives from TTI_EX355P.dbd
 TTI_EX355P_SRCS += TTI_EX355P_registerRecordDeviceDriver.cpp
