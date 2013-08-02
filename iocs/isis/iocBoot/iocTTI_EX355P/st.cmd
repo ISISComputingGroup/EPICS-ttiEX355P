@@ -2,9 +2,10 @@
 
 < envPaths
 
+epicsEnvSet "IOCNAME" "$(P=$(MYPVPREFIX))TTIEX355P"
+epicsEnvSet "IOCSTATS_DB" "$(DEVIOCSTATS)/db/iocAdminSoft.db"
+
 epicsEnvSet "STREAM_PROTOCOL_PATH" "$(TOP)/../../ttiEX355PApp/protocol"
-epicsEnvSet "P" "$(P=$(MYPVPREFIX))"
-epicsEnvSet "R" "$(R=TTIEX355P)"
 epicsEnvSet "TTY" "$(TTY=\\\\\\\\.\\\\COM1)"
 
 cd ${TOP}
@@ -20,8 +21,8 @@ asynSetOption("L0", -1, "parity", "none")
 asynSetOption("L0", -1, "stop", "1")
 
 ## Load record instances
-#dbLoadRecords("$(TOP)/../../db/ttiEX355P.template","P=$(P)$(R),PORT=L0")
-dbLoadRecords("$(TOP)/../../db/ttiEX355P.template","P=$(R),PORT=L0")
+dbLoadRecords("$(TOP)/../../db/ttiEX355P.template","P=$(IOCNAME),PORT=L0")
+dbLoadRecords("$(IOCSTATS_DB)","IOC=$(IOCNAME)")
 
 cd ${TOP}/iocBoot/${IOC}
 iocInit
