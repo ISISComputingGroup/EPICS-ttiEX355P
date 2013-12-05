@@ -21,7 +21,7 @@ asynSetOption("L0", -1, "parity", "none")
 asynSetOption("L0", -1, "stop", "1")
 
 ## Load record instances
-dbLoadRecords("$(TOP)/../../db/ttiEX355P.template","P=$(IOCNAME),PORT=L0")
+dbLoadRecords("$(TOP)/../../db/ttiEX355P.db","P=$(IOCNAME):,PORT=L0")
 dbLoadRecords("$(IOCSTATS_DB)","IOC=$(IOCNAME)")
 
 cd ${TOP}/iocBoot/${IOC}

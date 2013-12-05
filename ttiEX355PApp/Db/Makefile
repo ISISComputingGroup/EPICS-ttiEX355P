@@ -8,6 +8,7 @@ include $(TOP)/configure/CONFIG
 #DB_OPT = YES
 
 DB += ttiEX355P.template
+DB += ttiEX355P.db
 
 include $(TOP)/configure/RULES
 #----------------------------------------
