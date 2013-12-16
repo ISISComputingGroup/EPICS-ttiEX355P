@@ -124,7 +124,7 @@ record(ai, "$(P)CURRENT")
 }
 
 # Output control
-record(bo, "$(P)OUTPUT:SP") 
+record(bo, "$(P)OUTPUTSTATUS:SP") 
 {
     field(DESC, "Output control")
     field(SCAN, "Passive")
@@ -133,12 +133,12 @@ record(bo, "$(P)OUTPUT:SP")
     field(ZNAM, "Off")
     field(ONAM, "On")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:OUTPUT:SP")
+    field(SIOL, "$(P)SIM:OUTPUTSTATUS:SP")
     field(SDIS, "$(P)DISABLE")
 }
 
 # Output state
-record(bi, "$(P)OUTPUT") 
+record(bi, "$(P)OUTPUTSTATUS") 
 {
     field(SCAN, "1 second")
     field(DTYP, "stream")
@@ -146,15 +146,15 @@ record(bi, "$(P)OUTPUT")
     field(ZNAM, "Off")
     field(ONAM, "On")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:OUTPUT")
+    field(SIOL, "$(P)SIM:OUTPUTSTATUS")
     field(SDIS, "$(P)DISABLE")
 }
 
-alias("$(P)OUTPUT", "$(P)OUTPUT:SP:RBV")
+alias("$(P)OUTPUTSTATUS", "$(P)OUTPUTSTATUS:SP:RBV")
 
 
 # Output mode status
-record(bi, "$(P)OUTPUT_MODE") 
+record(bi, "$(P)OUTPUTMODE") 
 {
     field(SCAN, "1 second")
     field(DTYP, "stream")
@@ -162,7 +162,7 @@ record(bi, "$(P)OUTPUT_MODE")
     field(ZNAM, "Constant Voltage")
     field(ONAM, "Constant Current")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:OUTPUT_MODE")
+    field(SIOL, "$(P)SIM:OUTPUTMODE")
     field(SDIS, "$(P)DISABLE")
 }
 
@@ -226,7 +226,7 @@ alias("$(P)SIM:VOLTAGE","$(P)SIM:VOLTAGE:SP")
 
 alias("$(P)SIM:VOLTAGE","$(P)SIM:VOLTAGE:SP:RBV")
 
-record(bi, "$(P)SIM:OUTPUT_MODE")
+record(bi, "$(P)SIM:OUTPUTMODE")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
@@ -254,15 +254,15 @@ alias("$(P)SIM:CURRENT","$(P)SIM:CURRENT:SP")
 
 alias("$(P)SIM:CURRENT","$(P)SIM:CURRENT:SP:RBV")
 
-record(bi, "$(P)SIM:OUTPUT")
+record(bi, "$(P)SIM:OUTPUTSTATUS")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-alias("$(P)SIM:OUTPUT","$(P)SIM:OUTPUT:SP")
+alias("$(P)SIM:OUTPUTSTATUS","$(P)SIM:OUTPUTSTATUS:SP")
 
-alias("$(P)SIM:OUTPUT","$(P)SIM:OUTPUT:SP:RBV")
+alias("$(P)SIM:OUTPUTSTATUS","$(P)SIM:OUTPUTSTATUS:SP:RBV")
 
 record(stringin, "$(P)SIM:IDENT")
 {
